@@ -4,7 +4,6 @@ import Response from "../helper/response.js"
 
 export async function verifyUser(req, res, next) {
   try {
-    console.log(req.cookies)
     const authToken = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer ", "")
 
     if (!authToken) {

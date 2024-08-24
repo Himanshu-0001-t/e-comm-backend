@@ -97,31 +97,34 @@ export async function login(req, res) {
 
     const option = {
       httpOnly: true,
-      secure: false,
-      maxAge: 360000 * 60 * 60,
-      sameSite: 'None'
+      secure: true,
+      sameSite: 'None',
     }
 
     return res
-      .status(201)
+      .status(200)
       .cookie("accessToken", accessToken, option)
       .json({ success: true, message: "User Loged in successfully", user_id: userInDb._id })
 
   } catch (error) {
-    return Response.error(res, { message: "server error" }, error)
+    return Response.error(res, "server error", error)
   }
 }
 
 export async function logout(req, res) {
 
-  const option = {
-    httpOnly: true,
-    secure: true,
-    maxAge: 360000 * 60 * 60
-  }
+  try {
+    const option = {
+      httpOnly: true,
+      secure: true,
+      sameSite: 'None',
+    }
 
-  return res
-    .status(200)
-    .clearCookie("accessToken", option)
-    .json({ success: true, message: "User Loged Out successfully" })
+    return res
+      .status(200)
+      .clearCookie("accessToken", option)
+      .json({ success: true, message: "User Loged Out successfully" })
+  } catch (error) {
+    return Response.error(res, "server error", error)
+  }
 }
