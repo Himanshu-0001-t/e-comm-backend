@@ -97,8 +97,10 @@ export async function login(req, res) {
 
     const option = {
       httpOnly: true,
-      secure: true,
+      secure: false,
       sameSite: 'None',
+      maxAge: 3600000 * 24 * 15
+
     }
 
     return res
