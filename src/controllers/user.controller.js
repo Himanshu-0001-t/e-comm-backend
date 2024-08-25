@@ -105,7 +105,7 @@ export async function login(req, res) {
 
     return res.status(200)
       .cookie("Access_Token", accessToken, option)
-      .json({ success: "true", message: "user logged in successfully", userid: userInDb._id })
+      .json({ success: "true", message: "user logged in successfully", user_id: userInDb._id })
 
 
   } catch (error) {
@@ -126,7 +126,7 @@ export async function logout(req, res) {
 
     return res
       .status(200)
-      .clearCookie("accessToken", option)
+      .clearCookie("Access_Token", option)
       .json({ success: true, message: "User Loged Out successfully" })
   } catch (error) {
     return Response.error(res, "server error", error)
