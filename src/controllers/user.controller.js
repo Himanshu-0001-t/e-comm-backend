@@ -95,18 +95,17 @@ export async function login(req, res) {
       return Response.error(res, "Error while genrating access token")
     }
 
-    const option = {
+
+    res.cookie("Access_Token", accessToken, {
       httpOnly: true,
-      secure: false,
-      sameSite: 'None',
-      maxAge: 3600000 * 24 * 15
+      secure: true,
+      sameSite: 'none',
+      maxAge: 3600000 * 24 * 15,
+      path: '/'
+    })
 
-    }
+    return res.status(200).json({ success: "true", message: "user logged in successfully " })
 
-    return res
-      .status(200)
-      .cookie("accessToken", accessToken, option)
-      .json({ success: true, message: "User Loged in successfully", user_id: userInDb._id })
 
   } catch (error) {
     return Response.error(res, "server error", error)
@@ -119,7 +118,9 @@ export async function logout(req, res) {
     const option = {
       httpOnly: true,
       secure: true,
-      sameSite: 'None',
+      sameSite: 'none',
+      maxAge: 3600000 * 24 * 15,
+      path: '/'
     }
 
     return res

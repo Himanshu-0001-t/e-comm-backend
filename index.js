@@ -19,7 +19,8 @@ const app = express()
 app.use(express.json())
 app.use(express.urlencoded({ extended: true, limit: '16kb' }))
 app.use(cors({
-  origin: 'http://localhost:4000',
+  origin: ['http://localhost:4000', 'https://tausif-e-commerce.onrender.com', 'https://mukul-e-commerce.onrender.com'],
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true,
 }));
 app.use(cookieParser())
