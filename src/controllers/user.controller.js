@@ -95,16 +95,17 @@ export async function login(req, res) {
       return Response.error(res, "Error while genrating access token")
     }
 
-
-    res.cookie("Access_Token", accessToken, {
+    let option = {
       httpOnly: true,
       secure: true,
       sameSite: 'none',
       maxAge: 3600000 * 24 * 15,
       path: '/'
-    })
+    }
 
-    return res.status(200).json({ success: "true", message: "user logged in successfully " })
+    return res.status(200)
+      .cookie("Access_Token", accessToken, option)
+      .json({ success: "true", message: "user logged in successfully", userid: userInDb._id })
 
 
   } catch (error) {
