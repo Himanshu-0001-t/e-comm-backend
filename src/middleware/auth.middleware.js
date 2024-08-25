@@ -4,7 +4,7 @@ import Response from "../helper/response.js"
 
 export async function verifyUser(req, res, next) {
   try {
-    const authToken = req.cookies.accessToken || req.header("Authorization")?.replace("Bearer ", "")
+    const authToken = req.cookies.Access_Token || req.header("Authorization")?.replace("Bearer ", "")
 
     if (!authToken) {
       return Response.unauthorized(res, "Unauthorized User")
