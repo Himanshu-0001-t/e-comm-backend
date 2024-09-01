@@ -21,7 +21,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true, limit: '16kb' }))
 app.use(cors({
-  origin: ['http://localhost:4000'],
+  origin: ['http://localhost:4000', 'https://mukul-e-commerce.onrender.com', 'https://tausif-e-commerce.onrender.com'],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true,
 }));
