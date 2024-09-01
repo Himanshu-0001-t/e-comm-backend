@@ -3,6 +3,7 @@ import ProductModel from "../models/product.model.js"
 import Response from "../helper/response.js"
 import CategoryModal from "../models/category.model.js"
 
+
 export async function addProduct(req, res) {
 
   const { name, price, categorys, brand, description, stock, colors } = req.body
@@ -54,7 +55,6 @@ export async function addProduct(req, res) {
 
 export async function getAllProduct(req, res) {
   try {
-
     let totalProduct = await ProductModel.countDocuments()
 
     if (req.query.limit) {
@@ -77,7 +77,6 @@ export async function getAllProduct(req, res) {
 export async function getSingleProduct(req, res) {
 
   let id = req.params.id
-
   try {
     const product = await ProductModel.findById(id)
 
@@ -96,7 +95,6 @@ export async function getSingleProduct(req, res) {
 
 export async function filterProduct(req, res) {
   let { brand, price, category, search } = req.query
-
   let query = {}
 
   if (brand) {

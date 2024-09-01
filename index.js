@@ -40,6 +40,6 @@ app.get("/", (req, res) => {
 
 app.listen(process.env.PORT, () => {
   connectDB()
-  console.log("Server is runnig")
+  console.log("Server is runnig " + process.env.PORT)
 }
 )

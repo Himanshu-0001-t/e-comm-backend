@@ -7,10 +7,9 @@ import { isAdmin } from "../middleware/auth.middleware.js"
 const router = express.Router()
 
 router.post("/", isAdmin, upload.single("image"), addProduct)
-
+router.get("/search", filterProduct)
 router.get("/", getAllProduct)
 router.get("/:id", getSingleProduct)
-router.get("/q/", filterProduct)
 
 router.patch("/u/:id", isAdmin, updateProduct)
 router.delete("/d/:id", isAdmin, deleteProduct)
