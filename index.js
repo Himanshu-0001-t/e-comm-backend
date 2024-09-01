@@ -7,6 +7,7 @@ import productRouter from "./src/routes/product.route.js"
 import categoryRouter from "./src/routes/category.route.js"
 import cartRouter from './src/routes/cart.route.js'
 import orderRouter from './src/routes/order.route.js'
+
 import cookieParser from "cookie-parser"
 import cors from "cors"
 
@@ -20,7 +21,7 @@ app.use(cookieParser())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true, limit: '16kb' }))
 app.use(cors({
-  origin: ['http://localhost:4000', 'https://tausif-e-commerce.onrender.com', 'https://mukul-e-commerce.onrender.com'],
+  origin: ['http://localhost:4000'],
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true,
 }));
