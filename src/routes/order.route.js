@@ -5,8 +5,8 @@ import { verifyUser } from "../middleware/auth.middleware.js"
 
 const router = express.Router()
 
-router.post('/', verifyUser, createOrder)
-router.get('/All/:id', verifyUser, getOrders)
+router.post('/create', verifyUser, createOrder)
+router.get('all/:id', verifyUser, getOrders)
 router.get('/:id', verifyUser, getOrderById)
 
 router.get('/u/:id', verifyUser, updateOrder)

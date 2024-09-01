@@ -4,7 +4,7 @@ import { verifyUser } from "../middleware/auth.middleware.js"
 
 const router = express.Router()
 
-router.post('/', verifyUser, createOrUpdateCart)
+router.post('/add', verifyUser, createOrUpdateCart)
 router.get('/:id', verifyUser, getCartByUserId)
 router.patch('/update', verifyUser, updateProductQuantity)
 router.post('/remove', verifyUser, removeProductFromCart)
