@@ -4,12 +4,11 @@ import { isAdmin, verifyUser } from "../middleware/auth.middleware.js"
 
 const router = express.Router()
 
-router.post('/category', isAdmin, addCategory)
+router.post('/', isAdmin, addCategory)
+router.get('/', showAllCategory)
+router.get('/:id', getSingleCategory)
 
-router.get('/categorys', showAllCategory)
-router.get('/category/:id', getSingleCategory)
-
-router.patch('/category/u/', isAdmin, updateCategory)
-router.delete('/category/d/', isAdmin, deleteCategory)
+router.patch('/u/', isAdmin, updateCategory)
+router.delete('/d/', isAdmin, deleteCategory)
 
 export default router

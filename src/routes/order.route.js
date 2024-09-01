@@ -5,10 +5,11 @@ import { verifyUser } from "../middleware/auth.middleware.js"
 
 const router = express.Router()
 
-router.post('/order/', verifyUser, createOrder)
-router.get('/orders/:id', verifyUser, getOrders)
-router.get('/order/:id', verifyUser, getOrderById)
-router.get('/order/u/:id', verifyUser, updateOrder)
-router.get('/orders/d/:id', verifyUser, deleteOrder)
+router.post('/', verifyUser, createOrder)
+router.get('All/:id', verifyUser, getOrders)
+router.get('/:id', verifyUser, getOrderById)
+
+router.get('/u/:id', verifyUser, updateOrder)
+router.get('/d/:id', verifyUser, deleteOrder)
 
 export default router

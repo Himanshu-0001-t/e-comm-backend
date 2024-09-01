@@ -4,10 +4,10 @@ import { verifyUser } from "../middleware/auth.middleware.js"
 
 const router = express.Router()
 
-router.post('/cart', verifyUser, createOrUpdateCart)
-router.get('/cart/:id', verifyUser, getCartByUserId)
-router.patch('/cart/update', verifyUser, updateProductQuantity)
-router.post('/cart/remove', verifyUser, removeProductFromCart)
-router.post('/cart/clear', verifyUser, clearCart)
+router.post('/', verifyUser, createOrUpdateCart)
+router.get('/:id', verifyUser, getCartByUserId)
+router.patch('/update', verifyUser, updateProductQuantity)
+router.post('/remove', verifyUser, removeProductFromCart)
+router.post('/clear', verifyUser, clearCart)
 
 export default router

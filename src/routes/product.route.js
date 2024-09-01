@@ -6,14 +6,14 @@ import { isAdmin } from "../middleware/auth.middleware.js"
 
 const router = express.Router()
 
-router.post("/product", isAdmin, upload.single("image"), addProduct)
+router.post("/", isAdmin, upload.single("image"), addProduct)
 
-router.get("/products", getAllProduct)
-router.get("/product/:id", getSingleProduct)
-router.get("/products/q/", filterProduct)
+router.get("/", getAllProduct)
+router.get("/:id", getSingleProduct)
+router.get("/q/", filterProduct)
 
-router.patch("/product/u/:id", isAdmin, updateProduct)
-router.delete("/product/d/:id", isAdmin, deleteProduct)
+router.patch("/u/:id", isAdmin, updateProduct)
+router.delete("/d/:id", isAdmin, deleteProduct)
 
 
 export default router
