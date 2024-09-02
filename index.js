@@ -16,7 +16,7 @@ dotenv.config({
   path: './.env'
 })
 
-connectToDatabase()
+
 
 const app = express()
 
@@ -31,7 +31,13 @@ app.use(cors({
 
 
 app.get("/", (req, res) => {
-  res.send("this is web page")
+  res.send("this is web page hello")
+})
+
+app.get('/hello', (req, res) => {
+  let data = 1 + 5
+  return res.status(201).json({ success: true, data })
+
 })
 
 // Auth routes 
@@ -69,5 +75,8 @@ app.patch("/api/product/u/:id", isAdmin, updateProduct)
 app.delete("/api/product/d/:id", isAdmin, deleteProduct)
 
 
-app.listen(process.env.PORT, () => { console.log("Server is runnig " + process.env.PORT) }
+app.listen(process.env.PORT, () => {
+  connectToDatabase()
+  console.log("Server is runnig " + process.env.PORT)
+}
 )

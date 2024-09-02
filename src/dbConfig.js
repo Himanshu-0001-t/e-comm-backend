@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 let cachedDb = null;
 
@@ -8,10 +8,7 @@ async function connectToDatabase() {
   }
 
   try {
-    const connection = await mongoose.connect(process.env.MONGODB_URI, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    const connection = await mongoose.connect(process.env.MONGODB_URI);
     cachedDb = connection;
     return cachedDb;
   } catch (error) {
@@ -19,5 +16,4 @@ async function connectToDatabase() {
     throw error;
   }
 }
-
-module.exports = connectToDatabase;
+export default connectToDatabase;
