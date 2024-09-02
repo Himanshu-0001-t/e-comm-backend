@@ -1,21 +1,23 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
-export function connectDB() {
+let cachedDb = null;
+
+async function connectToDatabase() {
+  if (cachedDb) {
+    return cachedDb;
+  }
 
   try {
-    mongoose.connect(process.env.MONGODB_URI)
-
-    mongoose.connection.on("success", () => {
-      console.log("MogoDB Connected Successfully")
-    })
-
-    mongoose.connection.on("error", () => {
-      console.log("Error in connecting to datadase")
-      process.exit(1)
-    })
+    const connection = await mongoose.connect(process.env.MONGODB_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    });
+    cachedDb = connection;
+    return cachedDb;
   } catch (error) {
-
-    console.log("Error in connecting to datadase")
-    process.exit(1)
+    console.error('MongoDB connection error:', error);
+    throw error;
   }
 }
+
+module.exports = connectToDatabase;

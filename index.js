@@ -1,6 +1,6 @@
 import express from "express"
 import dotenv from "dotenv"
-import { connectDB } from "./src/dbConfig.js"
+import connectToDatabase from "./src/dbConfig.js"
 import cookieParser from "cookie-parser"
 import cors from "cors"
 import { upload } from "./src/middleware/multer.middleware.js"
@@ -16,6 +16,8 @@ dotenv.config({
   path: './.env'
 })
 
+connectToDatabase()
+
 const app = express()
 
 app.use(cookieParser())
@@ -29,7 +31,7 @@ app.use(cors({
 
 
 app.get("/", (req, res) => {
-  res.send("Welcome to my web page")
+  res.send("this is web page")
 })
 
 // Auth routes 
@@ -67,8 +69,5 @@ app.patch("/api/product/u/:id", isAdmin, updateProduct)
 app.delete("/api/product/d/:id", isAdmin, deleteProduct)
 
 
-app.listen(process.env.PORT, () => {
-  connectDB()
-  console.log("Server is runnig " + process.env.PORT)
-}
+app.listen(process.env.PORT, () => { console.log("Server is runnig " + process.env.PORT) }
 )
