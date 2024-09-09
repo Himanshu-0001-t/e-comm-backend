@@ -55,10 +55,12 @@ export async function addProduct(req, res) {
 
 export async function getAllProduct(req, res) {
   try {
-    const totalProduct = await ProductModel.countDocuments();
+    let totalProduct = await ProductModel.countDocuments();
+
     if (req.query.limit) {
-      totalProduct = parseInt(req.query.limit, 10);
+      totalProduct = parseInt(req.query.limit);
     }
+
     const Products = await ProductModel.aggregate([{ $sample: { size: totalProduct } }]);
     if (!Products || !Array.isArray(Products) || Products.length === 0) {
 
