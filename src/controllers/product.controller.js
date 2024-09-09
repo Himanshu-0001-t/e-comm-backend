@@ -55,12 +55,10 @@ export async function addProduct(req, res) {
 
 export async function getAllProduct(req, res) {
   try {
-    let totalProduct = await ProductModel.countDocuments()
-
     if (req.query.limit) {
       totalProduct = parseInt(req.query.limit)
     }
-
+    let totalProduct = await ProductModel.countDocuments()
     const Products = await ProductModel.aggregate([{ $sample: { size: totalProduct } }])
 
     if (!Products || Products.length == 0) {
@@ -109,9 +107,8 @@ export async function filterProduct(req, res) {
     query.category = category
   }
 
-
   if (search) {
-    query.category = search
+    query.category = search.toLowerCase()
   }
 
   try {
