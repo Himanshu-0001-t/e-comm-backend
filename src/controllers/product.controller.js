@@ -55,20 +55,22 @@ export async function addProduct(req, res) {
 
 export async function getAllProduct(req, res) {
   try {
+    const totalProduct = await ProductModel.countDocuments();
     if (req.query.limit) {
-      totalProduct = parseInt(req.query.limit)
+      totalProduct = parseInt(req.query.limit, 10);
     }
-    let totalProduct = await ProductModel.countDocuments()
-    const Products = await ProductModel.aggregate([{ $sample: { size: totalProduct } }])
+    const Products = await ProductModel.aggregate([{ $sample: { size: totalProduct } }]);
+    if (!Products || !Array.isArray(Products) || Products.length === 0) {
 
-    if (!Products || Products.length == 0) {
-
-      return Response.notFound(res, "Products not found")
+      return Response.notFound(res, "Products not found");
     }
-    return Response.success(res, Products, "product Feached Successfully")
+    return Response.success(res, Products, "product Feached Successfully");
 
   } catch (error) {
-    return Response.error(res, "server error", 500, { error })
+    if (error.name === "CastError") {
+      return Response.error(res, "Invalid value for limit", 400, { error });
+    }
+    return Response.error(res, "server error", 500, { error });
   }
 }
 
